@@ -1,3 +1,5 @@
+
+Save  New  Duplicate & Edit  Just Text
 const Discord = require('discord.js')
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
@@ -52,7 +54,7 @@ client.on("message", async message => {
       }
         const playlistembed = new Discord.RichEmbed()
         .setColor(`GREEN`)
-        .setDescription(`✅ ${playlist.title} has been added to the queue!`)
+        .setDescription(`âœ… ${playlist.title} has been added to the queue!`)
       return message.channel.send(playlistembed);
     } else {
       try {
@@ -64,7 +66,7 @@ client.on("message", async message => {
           let selectionemb = new Discord.RichEmbed()
           .setTitle(`:notes: Song selection`)
           .setDescription(`${videos.map(video2 => `**${++index} -** [${video2.title}](${video2.url})`).join('\n')}`)
-          .setFooter('🔎 Please provide a number to select one of the search results ranging from 1-9.')
+          .setFooter('ðŸ”Ž Please provide a number to select one of the search results ranging from 1-9.')
           .setColor('#0fe709')
           message.channel.send(selectionemb).then(message => {
             message.delete(11000)
@@ -105,7 +107,7 @@ client.on("message", async message => {
       case "np":
     if (!serverQueue) return message.channel.send('There is nothing playing.');
         let nowplayingemb = new Discord.RichEmbed()
-        .setDescription(`🎶 Now playing: **${serverQueue.songs[0].title}**`)
+        .setDescription(`ðŸŽ¶ Now playing: **${serverQueue.songs[0].title}**`)
         .setColor(`GREEN`)
     return message.channel.send(nowplayingemb);
 break;
@@ -113,7 +115,7 @@ break;
     if (!serverQueue) return message.channel.send('No music playing right now.');
         let queueemb = new Discord.RichEmbed()
         .setAuthor(`${message.guild.name} Queue list `)
-        .setDescription(`${serverQueue.songs.map(song => `**•** [${song.title}](https://www.youtube.com/watch?v=${song.id}})`).join('\n')}\n\n🎶 **Now playing:** ${serverQueue.songs[0].title}`)
+        .setDescription(`${serverQueue.songs.map(song => `**â€¢** [${song.title}](https://www.youtube.com/watch?v=${song.id}})`).join('\n')}\n\nðŸŽ¶ **Now playing:** ${serverQueue.songs[0].title}`)
         .setColor(`GREEN`)
     return message.channel.send(queueemb)
 break;
@@ -248,28 +250,14 @@ message.channel.send(support);
                     .setTimestamp()
                     .setFooter('Reqeuested By ' + message.author.tag);
                 message.channel.send(support);
-          try {
-            var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 1, {
-              maxMatches: 1,
-              time: 10000,
-              errors: ['time']
-            });
-          } catch (err) {
-            console.error(err);
-            let noinvemb = new Discord.RichEmbed()
-            .setDescription('No or invalid value entered, cancelling video selection.')
-            .setColor('#e41016')
-            return message.channel.send(noinvemb).then(message => {
-              message.delete(5000)
-            })
-          }
-            }
-            if (response.first().content) {
+                if(`${args[0]}` == 1) {
                 message.member.voiceChannel.join()
                     .then(connection => {
                         connection.playStream('https://listen.moe/opus')
                 
                 })
+message.channel.send('Playing Radio')
+}
             }
 });
 client.login(config.token)
